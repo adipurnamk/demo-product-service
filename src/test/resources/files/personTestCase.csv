@@ -1,0 +1,2 @@
+No;Desc;Request;Res_Http_Expected;Expected_Res_Body
+TC-01;HALO;{"id":1};200;{"name":"Ainul yaqin","id":1,"email":"test-apa-pagi@fisclouds.com"}
