@@ -54,21 +54,33 @@ jobs:
     #   with:
     #     maven-args: "clean install"
     
-    # Build the Docker image
+    # # Build the Docker image
+    # - name: Build
+    #   run: |-
+    #     sudo apt install openjdk-11-jdk-headless maven -y
+    #     mvn clean package 
+    #     docker build \
+    #       --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+    #       --build-arg GITHUB_SHA="$GITHUB_SHA" \
+    #       --build-arg GITHUB_REF="$GITHUB_REF" \
+    #       .
+
+    # Build the Docker image with latest tag
     - name: Build
       run: |-
         sudo apt install openjdk-11-jdk-headless maven -y
         mvn clean package 
-        docker build \
-          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
-          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" \
-          .
+        docker build --tag "gcr.io/$PROJECT_ID/demo-product-service:latest" .
+
+    # # Push the Docker image to Google Container Registry
+    # - name: Publish
+    #   run: |-
+    #     docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+        docker push "gcr.io/$PROJECT_ID/demo-product-service:latest"
 
     # # Set up kustomize
     # - name: Set up Kustomize
