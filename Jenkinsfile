@@ -17,7 +17,7 @@ pipeline {
             sh "gcloud config get-value project"
             sh "sudo apt install openjdk-11-jdk-headless maven -y"
             sh "mvn clean package" 
-            sh "gcloud builds submit --region=us-west2 --tag us-west2-docker.pkg.dev/$PROJECT_ID/demo-product-service:v1.0.0"
+            sh "gcloud builds submit --region=us-west2 --tag gcr.io/fisclouds-demos/demo-product-service:v1.0.0"
           // }
         }
       }
