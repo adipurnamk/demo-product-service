@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-deployment
+spec:
+  selector:
+    matchLabels:
+      app: product
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product
+    spec:
+      containers:
+      - name: product
+        image: gcr.io/fisclouds-demos/demo-product-service:v1.0.0
+        ports:
+        - containerPort: 8080
