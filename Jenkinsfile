@@ -13,11 +13,21 @@ pipeline {
       steps {
         // dir("hello-app") {
           container("gcloud") {
-            // Cheat by using Cloud Build to help us build our container
-            sh "gcloud config get-value project"
-            sh "sudo apt install openjdk-11-jdk-headless maven -y"
-            sh "mvn clean package" 
-            sh "gcloud builds submit --region=us-west2 --tag gcr.io/fisclouds-demos/demo-product-service:v1.0.0"
+              withCredentials([file(credentialsId: 'service-account', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                // Cheat by using Cloud Build to help us build our container
+                sh '''
+                // gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+                gcloud config get-value project
+                apt install openjdk-11-jre-headless -y
+                # java already installed
+                java -version
+                apt-get update
+                apt-get install maven -y
+                mvn -version
+                mvn clean package
+                gcloud builds submit --region=us-west2 --tag gcr.io/fisclouds-demos/demo-product-service:v1.0.0
+                '''
+              }
           // }
         }
       }
