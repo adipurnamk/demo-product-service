@@ -13,20 +13,21 @@ pipeline {
       steps {
         // dir("hello-app") {
           container("gcloud") {
-              withCredentials([file(credentialsId: 'gke-push-gcr', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+              withCredentials([file(credentialsId: 'qwiklabs', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
                 // Cheat by using Cloud Build to help us build our container
                 sh '''
-                # gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+                gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
                 gcloud config list account --format "value(core.account)"
                 gcloud config get-value project
                 apt install openjdk-11-jre-headless -y
                 # java already installed
                 java -version
                 apt-get update
-                apt-get install maven docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+                # apt-get install maven docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+                apt-get install maven -y
                 mvn -version
                 mvn clean package
-                # gcloud builds submit --region=us-central1-c --tag gcr.io/qwiklabs-gcp-01-123d056fbdd7/demo-product-service:v1.0.0
+                gcloud builds submit --tag gcr.io/qwiklabs-gcp-01-7297809b5f6f/demo-product-service:v1.0.0
                 docker build -t gcr.io/qwiklabs-gcp-01-123d056fbdd7/demo-product-service:v1.0.0
                 docker push
                 '''
