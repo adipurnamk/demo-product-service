@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: product
-        image: gcr.io/fisclouds-demos/demo-product-service:v1.0.0
+        image: gcr.io/qwiklabs-gcp-01-92f862dec37b/demo-product-service:v1.0.0
         ports:
         - containerPort: 8080
