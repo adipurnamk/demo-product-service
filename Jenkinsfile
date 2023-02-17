@@ -22,6 +22,7 @@ pipeline {
                 
                 # build jar phase
                 
+                apt-get update
                 apt-get install maven -y
                 mvn -version
                 mvn clean package
