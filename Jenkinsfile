@@ -26,7 +26,7 @@ pipeline {
                 apt-get install maven -y
                 mvn -version
                 mvn clean package
-                gcloud builds submit --tag gcr.io/qwiklabs-gcp-03-392c551c7be6/demo-product-service:v1.0.0
+                gcloud builds submit --tag gcr.io/qwiklabs-gcp-04-886229844db0/demo-product-service:v1.0.0
                 '''
               }
           // }
