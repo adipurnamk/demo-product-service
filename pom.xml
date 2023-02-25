@@ -5,7 +5,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.3</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fis.app</groupId>
 	<artifactId>demo-product-service</artifactId>
@@ -96,7 +96,7 @@
 		<dependency>
 			<groupId>org.mock-server</groupId>
 			<artifactId>mockserver-client-java</artifactId>
-			<version>5.11.2</version>
+			<version>5.15.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
